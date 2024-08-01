@@ -6,6 +6,12 @@ import org.springframework.stereotype.Service;
 public class TaxService {
 
     public double tax(double amount){
-        return amount * 0.2;
+        if (amount < 100){
+            return amount * 20;
+        } else if (amount >= 100 && amount < 200) {
+            return amount * 12;
+        }else{
+            return amount;
+        }
     }
 }

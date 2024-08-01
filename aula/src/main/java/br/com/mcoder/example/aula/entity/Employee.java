@@ -2,41 +2,40 @@ package br.com.mcoder.example.aula.entity;
 
 public class Employee {
 
-    private Integer cod;
-    private String name;
-    private Double glossSalary;
+    private Integer id;
+    private Double basicValue;
+    private Double discountPercent;
 
     public Employee() {
     }
 
-    public Employee(Integer cod, String name, Double glossSalary) {
-        this.cod = cod;
-        this.name = name;
-        this.glossSalary = glossSalary;
+    public Employee(Integer id, Double basicValue, Double discountPercent) {
+        this.id = id;
+        this.basicValue = basicValue;
+        this.discountPercent = discountPercent;
     }
 
-    public Integer getCod() {
-        return cod;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCod(Integer cod) {
-        this.cod = cod;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public Double getBasicValue() {
+        return basicValue;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setBasicValue(Double basicValue) {
+        this.basicValue = basicValue;
     }
 
-    public Double getGlossSalary() {
-        return glossSalary;
+    public Double getDiscountPercent() {
+        return discountPercent;
     }
 
-    public void setGlossSalary(Double glossSalary) {
-        this.glossSalary = glossSalary;
+    public void setDiscountPercent(Double discountPercent) {
+        this.discountPercent = discountPercent;
     }
-
 }

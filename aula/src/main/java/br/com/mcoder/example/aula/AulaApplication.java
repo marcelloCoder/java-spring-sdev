@@ -25,13 +25,31 @@ public class AulaApplication implements CommandLineRunner {
 
 		Locale.setDefault(Locale.US);
 		Scanner scanner = new Scanner(System.in);
-		int cod = scanner.nextInt();
-		double valor = scanner.nextDouble();
-		Employee employee = new Employee(cod,null, valor);
+		int id = scanner.nextInt();
+		double basicValue = scanner.nextDouble();
+		double discount = scanner.nextDouble();
+		Employee employee = new Employee(id,basicValue, discount);
 		System.out.println("\n\n\n\n");
-		System.out.println("Pedido código: " + employee.getCod());
-		System.out.println(employee.getGlossSalary());
-		System.out.println("Valor total: " + salaryService.netSalary(employee));
+		System.out.println("Pedido código: " + employee.getId());
+
+		double totalValue;
+		double discountValue = basicValue * (discount/100);
+		double realValue = basicValue - discountValue;
+		if(realValue < 100){
+			totalValue = realValue + 20;
+			System.out.println("Valor total: " + totalValue);
+		} else if (realValue >= 100 && realValue < 200) {
+			totalValue = realValue + 12;
+			System.out.println("Valor total: " + totalValue);
+		}else{
+			totalValue = realValue;
+			System.out.println("Valor total: " + totalValue);
+		}
+
+
+
 	}
+
+
 
 }
