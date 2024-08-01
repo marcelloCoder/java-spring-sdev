@@ -1,7 +1,10 @@
 package br.com.mcoder.example.aula;
 
 import br.com.mcoder.example.aula.entity.Employee;
+import br.com.mcoder.example.aula.entity.Order;
+import br.com.mcoder.example.aula.service.OrderService;
 import br.com.mcoder.example.aula.service.SalaryService;
+import br.com.mcoder.example.aula.service.ShippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +17,10 @@ import java.util.Scanner;
 public class AulaApplication implements CommandLineRunner {
 
 	@Autowired
-	private SalaryService salaryService;
+	private OrderService orderService;
+
+	@Autowired
+	private ShippingService shippingService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(AulaApplication.class, args);
@@ -25,27 +31,22 @@ public class AulaApplication implements CommandLineRunner {
 
 		Locale.setDefault(Locale.US);
 		Scanner scanner = new Scanner(System.in);
-		int id = scanner.nextInt();
-		double basicValue = scanner.nextDouble();
-		double discount = scanner.nextDouble();
-		Employee employee = new Employee(id,basicValue, discount);
-		System.out.println("\n\n\n\n");
-		System.out.println("Pedido código: " + employee.getId());
 
-		double totalValue;
-		double discountValue = basicValue * (discount/100);
-		double realValue = basicValue - discountValue;
-		if(realValue < 100){
-			totalValue = realValue + 20;
-			System.out.println("Valor total: " + totalValue);
-		} else if (realValue >= 100 && realValue < 200) {
-			totalValue = realValue + 12;
-			System.out.println("Valor total: " + totalValue);
-		}else{
-			totalValue = realValue;
-			System.out.println("Valor total: " + totalValue);
-		}
 
+		System.out.println("Digite o código do pedido:");
+		Integer code = scanner.nextInt();
+
+		System.out.println("Digite o valor básico do pedido:");
+		Double basic = scanner.nextDouble();
+
+		System.out.println("Digite o valor do desconto:");
+		Double discount = scanner.nextDouble();
+
+		Order order = new Order(code, basic, discount);
+		Double shipment = shippingService.shipment(order);
+		Double total = orderService.total(order);
+
+		System.out.printf("Pedido código: %d Valor total: %.2f%n", order.getCode(), shipment - total);
 
 
 	}
